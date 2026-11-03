@@ -1,0 +1,51 @@
+const CACHE_NAME = 'final-ops-25-v1.0';
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './app.js',
+  './manifest.json',
+  './icon.svg'
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS_TO_CACHE);
+    })
+  );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            return caches.delete(cache);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      return cachedResponse || fetch(event.request).then((networkResponse) => {
+        return caches.open(CACHE_NAME).then((cache) => {
+          if (event.request.method === 'GET' && event.request.url.startsWith('http')) {
+            cache.put(event.request, networkResponse.clone());
+          }
+          return networkResponse;
+        });
+      });
+    }).catch(() => {
+      if (event.request.mode === 'navigate') {
+        return caches.match('./index.html');
+      }
+    })
+  );
+});
