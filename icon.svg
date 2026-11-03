@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#34D399" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Squircle -->
+  <rect width="512" height="512" rx="115" fill="url(#bgGrad)" />
+  <rect x="16" y="16" width="480" height="480" rx="100" fill="none" stroke="#1E293B" stroke-width="6" />
+
+  <!-- Outer Tactical Octagon Ring -->
+  <polygon points="256,64 392,120 448,256 392,392 256,448 120,392 64,256 120,120" 
+           fill="none" stroke="url(#goldGrad)" stroke-width="10" stroke-linejoin="round" opacity="0.85" />
+
+  <!-- Inner Rotated Square (Rub el Hizb Motif) -->
+  <rect x="146" y="146" width="220" height="220" rx="18" 
+        fill="none" stroke="#334155" stroke-width="8" />
+  <rect x="146" y="146" width="220" height="220" rx="18" 
+        transform="rotate(45 256 256)" fill="none" stroke="#334155" stroke-width="8" />
+
+  <!-- Center Emerald Chevron / Ascent Pillar -->
+  <path d="M256 135 L350 285 L302 285 L256 210 L210 285 L162 285 Z" fill="url(#emeraldGrad)" />
+  <path d="M190 330 L322 330 L342 365 L170 365 Z" fill="url(#goldGrad)" />
+  
+  <!-- Top Focus Dot -->
+  <circle cx="256" cy="102" r="10" fill="#34D399" />
+</svg>
